@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
     title: String,
-    body: String
+    body: String,
+    username: String,
+    created_At: { type: Date, default: new Date() }
 });
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);

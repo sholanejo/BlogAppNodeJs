@@ -11,6 +11,7 @@ The following technologies were used in this project:
 - [JavaScript](https://www.javascript.com)
 - [Express.js](https://expressjs.com/)
 - [Node.js](https://nodejs.org/)
+- [EJS](https://ejs.co/)
 - [MongoDb](https://www.mongodb.com/cloud/atlas)
 
 
