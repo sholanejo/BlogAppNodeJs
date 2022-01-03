@@ -11,9 +11,17 @@ console.log("Successfully connected to database");
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
-app.use(fileUpload())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(fileUpload())
+app.use('posts/store', validateMiddleware)
+
+const validateMiddleware = (req, res, next) => {
+    if (req.files == null || req.body.title == null) {
+        return res.redirect('posts/new')
+    }
+    next();
+}
 
 app.get('/', async(req, res) => {
     const blogposts = await BlogPost.find({})
