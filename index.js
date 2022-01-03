@@ -9,6 +9,8 @@ const contactController = require('./controllers/contact')
 const aboutController = require('./controllers/about')
 const getPostController = require('./controllers/getPost')
 const savePostController = require('./controllers/savePost')
+const newUserController = require('./controllers/createNewUser');
+const storeUserController = require('./controllers/storeUser')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/BlogApp', { useNewUrlParser: true })
@@ -31,7 +33,11 @@ app.get('/about', aboutController);
 
 app.get('/post/:id', getPostController);
 
+app.get('/auth/register', newUserController)
+
 app.post('/posts/store', savePostController);
+
+app.post('/users/register', storeUserController);
 
 app.listen(4000, () => {
     console.log('App listening on port 4000')

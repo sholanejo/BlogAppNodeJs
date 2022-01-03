@@ -29,8 +29,13 @@
                         </a>
                     </li>
                 </ul>
-                <div class="small text-center text-muted fst-italic">Copyright &copy; King T major 2022</div>
+
+                <div class="small text-center text-muted fst-italic">Copyright &copy; King T major <span id="current-year"></span></div>
             </div>
         </div>
+        <script>
+            const year = document.querySelector('#current-year')
+            year.innerHTML = new Date().getFullYear();
+        </script>
     </div>
 </footer>
