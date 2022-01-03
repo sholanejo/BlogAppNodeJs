@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = new express();
+const fileUpload = require('express-fileupload')
 const ejs = require('ejs');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
@@ -10,6 +11,7 @@ console.log("Successfully connected to database");
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
+app.use(fileUpload())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -39,11 +41,13 @@ app.get('/posts/new', (req, res) => {
     res.render('create')
 })
 
-app.post('/posts/store', async(req, res) => {
-    await BlogPost.create(req.body)
-    res.redirect('/')
-
-
+app.post('/posts/store', (req, res) => {
+    let image = req.files.image;
+    image.mv(path.resolve(__dirname, 'public/img', image.name),
+        async(error) => {
+            await BlogPost.create(req.body)
+            res.redirect('/')
+        })
 })
 
 app.listen(4000, () => {

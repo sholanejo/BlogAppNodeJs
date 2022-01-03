@@ -32,7 +32,7 @@
                                 <!-- To make this form functional, sign up at-->
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
-                                <form action="/posts/store" method="post">
+                                <form action="/posts/store" method="post" enctype="multipart/form-data">
                                     <div class="form-floating">
                                         <input class="form-control" id="title" name="title" type="text" placeholder="Enter Blog Title..." data-sb-validations="required" />
                                         <label for="title">Blog Title</label>
@@ -43,23 +43,13 @@
                                         <label for="body">Blog Content Body</label>
                                         <div class="invalid-feedback" data-sb-feedback="message:required">Please Enter Blog Content</div>
                                     </div>
-                                    <br />
-                                    <!-- Submit success message-->
-                                    <!---->
-                                    <!-- This is what your users will see when the form-->
-                                    <!-- has successfully submitted-->
-                                    <div class="d-none" id="submitSuccessMessage">
-                                        <div class="text-center mb-3">
-                                            <div class="fw-bolder">Post submission successful!</div>
+                                    <div class="control-group">
+                                        <div class="form-group floating-label-form-group controls">
+                                            <label>Image</label>
+                                            <input type="file" class="form-control" id="image" name="image">
                                         </div>
                                     </div>
-                                    <!-- Submit error message-->
-                                    <!---->
-                                    <!-- This is what your users will see when there is-->
-                                    <!-- an error submitting the form-->
-                                    <div class="d-none" id="submitErrorMessage">
-                                        <div class="text-center text-danger mb-3">Error sending message!</div>
-                                    </div>
+                                    <br />
                                     <!-- Submit Button-->
                                     <button class="btn btn-primary text-uppercase" id="sendMessageButton" type="submit">Send</button>
                                 </form>
