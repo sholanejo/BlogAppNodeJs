@@ -9,9 +9,12 @@ const contactController = require('./controllers/contact')
 const aboutController = require('./controllers/about')
 const getPostController = require('./controllers/getPost')
 const savePostController = require('./controllers/savePost')
-const newUserController = require('./controllers/createNewUser');
+const newUserController = require('./controllers/createNewUser')
+const loginController = require('./controllers/login')
+const loginUserController = require('./controllers/loginUser')
 const storeUserController = require('./controllers/storeUser')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/BlogApp', { useNewUrlParser: true })
 console.log("Successfully connected to database");
@@ -22,6 +25,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload())
 app.use('posts/store', validateMiddleware)
+app.use(expressSession({
+    secret: 'keyboard cat'
+}))
 
 app.get('/posts/new', newPostController);
 
@@ -33,11 +39,15 @@ app.get('/about', aboutController);
 
 app.get('/post/:id', getPostController);
 
-app.get('/auth/register', newUserController)
+app.get('/auth/register', newUserController);
+
+app.get('/auth/login', loginController);
 
 app.post('/posts/store', savePostController);
 
 app.post('/users/register', storeUserController);
+
+app.post('/users/login', loginUserController);
 
 app.listen(4000, () => {
     console.log('App listening on port 4000')
