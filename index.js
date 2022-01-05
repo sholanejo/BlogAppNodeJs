@@ -19,8 +19,14 @@ const redirectIfAuthenticatedMidddleware = require('./middleware/redirectIfAuthe
 const expressSession = require('express-session');
 const authMiddleware = require('./middleware/authMiddleware')
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/BlogApp', { useNewUrlParser: true })
-console.log("Successfully connected to database");
+mongoose.connect('mongodb://localhost/BlogApp', { useNewUrlParser: true }).then(() =>
+{
+    console.log("Successfully connected to database");
+}).catch((error) => {
+    console.log("database connection failed. exiting now...");
+    console.error(error);
+    process.exit(1);
+});
 
 global.loggedIn = null;
 
@@ -60,7 +66,7 @@ app.post('/users/register', redirectIfAuthenticatedMidddleware, storeUserControl
 
 app.post('/users/login', redirectIfAuthenticatedMidddleware, loginUserController);
 
-app.post((req, res) => res.render('notfound'))
+app.use((req, res) => res.render('notfound'))
 
 app.listen(4000, () => {
     console.log('App listening on port 4000')
