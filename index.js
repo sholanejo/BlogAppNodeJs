@@ -2,6 +2,7 @@ const express = require('express');
 const app = new express();
 const fileUpload = require('express-fileupload')
 const ejs = require('ejs');
+const flash = require('connect-flash')
 const validateMiddleware = require('./middleware/validationMiddleware')
 const newPostController = require('./controllers/newPost')
 const homePageController = require('./controllers/homePage')
@@ -36,6 +37,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload())
 app.use('posts/store', validateMiddleware)
+app.use(flash())
 app.use(expressSession({
     secret: 'keyboard cat'
 }))
