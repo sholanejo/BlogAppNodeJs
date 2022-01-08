@@ -40,6 +40,13 @@
                                     </div>
                                     <div class="form-floating">
                                         <textarea rows="5" class="form-control" id="body" name="body" placeholder="Enter your post here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                        <script>
+$('#body').summernote({
+placeholder: 'Hello bootstrap 4',
+tabsize: 2,
+height: 200
+});
+</script>
                                         <label for="body">Blog Content Body</label>
                                         <div class="invalid-feedback" data-sb-feedback="message:required">Please Enter Blog Content</div>
                                     </div>
