@@ -10,7 +10,7 @@ module.exports = (req, res) => {
         password = data.password
     }
     res.render('register', {
-        errors: flash('validationErrors'),
+        errors: req.flash('validationErrors'),
         username : username,
         password : password
     });
